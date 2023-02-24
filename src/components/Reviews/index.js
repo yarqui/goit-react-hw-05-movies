@@ -1,2 +1,1 @@
-export default first;
-export { default } from './Reviews'
+export { default } from './Reviews';
