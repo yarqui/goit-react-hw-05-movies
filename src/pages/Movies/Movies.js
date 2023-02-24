@@ -1,7 +1,6 @@
 const Movies = () => {
   return (
     <>
-      <p>Here will be movies</p>;
       <form>
         <input
           type="text"
@@ -12,6 +11,7 @@ const Movies = () => {
         ></input>
         <button type="submit">Search</button>
       </form>
+      <p>Here will be movie-search</p>;
     </>
   );
 };
