@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
+import PAGE_NAMES from 'router/paths';
 import { getMovieById } from 'services/api';
 import { BASE_IMG_URL } from 'services/api';
 import defaultPoster from '../../images/default-poster.webp';
-console.log('defaultPoster:', defaultPoster);
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
+  const { title, poster_path, vote_average, overview, genres } = movieDetails;
 
   useEffect(() => {
     getMovieById(movieId).then(data => setMovieDetails(data));
   }, [movieId]);
-
-  const { title, poster_path, vote_average, overview, genres } = movieDetails;
 
   return (
     <>
@@ -40,7 +39,12 @@ const MovieDetails = () => {
           </>
         )}
       </section>
-      <Outlet></Outlet>
+      <section>
+        <h4>Additional information</h4>
+        <Link to={PAGE_NAMES.cast}>Cast</Link>
+        <Link to={PAGE_NAMES.reviews}>Reviews</Link>
+        <Outlet></Outlet>
+      </section>
     </>
   );
 };
