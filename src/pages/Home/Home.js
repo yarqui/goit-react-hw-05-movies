@@ -2,6 +2,8 @@ import { getTrendingMovies } from 'services/api';
 import MovieItems from 'components/MovieItems';
 import { useEffect, useState } from 'react';
 
+// TODO: set <main> tag in body
+
 const Home = () => {
   const [movies, setMovies] = useState([]);
 

@@ -1,13 +1,11 @@
-import PAGE_NAMES from 'router/paths';
+// import PAGE_NAMES from 'router/paths';
 import { ItemLink } from './MovieItems.styled';
 
-// TODO: Make a proper navigation to movieDeatails
-
 const MovieItems = ({ movies }) => {
-  return movies.map(movie => {
+  return movies.map(({ id, title }) => {
     return (
-      <li key={movie.id}>
-        <ItemLink to={PAGE_NAMES.movieDetails}>{movie.title}</ItemLink>
+      <li key={id}>
+        <ItemLink to={`/movies/${id}`}>{title ? title : 'No title'}</ItemLink>
       </li>
     );
   });

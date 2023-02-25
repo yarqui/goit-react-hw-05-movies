@@ -12,7 +12,9 @@ const SharedLayout = () => {
           <NavLink to={PAGE_NAMES.movies}>Movies</NavLink>
         </nav>
       </header>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </Container>
   );
 };

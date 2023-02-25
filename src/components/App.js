@@ -1,4 +1,4 @@
-//  use this -> generatePath(PAGE_NAMES,{dynamicParam})
+//  TODO: use this -> generatePath(PAGE_NAMES,{dynamicParam})
 
 import { Route, Routes } from 'react-router-dom';
 import Cast from './Cast';
@@ -8,6 +8,7 @@ import MovieDetails from 'pages/MovieDetails';
 import Reviews from './Reviews/Reviews';
 import SharedLayout from '../Layouts/SharedLayout';
 import PAGE_NAMES from 'router/paths';
+import NotFound from 'pages/NotFound';
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
           <Route path={PAGE_NAMES.cast} element={<Cast />}></Route>
           <Route path={PAGE_NAMES.reviews} element={<Reviews />}></Route>
         </Route>
-        <Route path={PAGE_NAMES.homepage} element={<Home />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Route>
     </Routes>
   );
