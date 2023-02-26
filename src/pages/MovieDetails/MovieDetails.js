@@ -17,7 +17,7 @@ const MovieDetails = () => {
   return (
     <>
       <section>
-        <button type="submit">Go back</button>
+        <button type="button">Go back</button>
         <img
           src={poster_path ? `${BASE_IMG_URL}${poster_path}` : defaultPoster}
           alt={title}

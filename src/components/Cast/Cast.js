@@ -14,8 +14,6 @@ const Cast = () => {
 
   return (
     <>
-      <p>Cast page</p>
-
       <ul>
         {cast.map(({ id, name, character, profile_path }) => {
           return (
