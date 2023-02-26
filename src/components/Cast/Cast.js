@@ -6,7 +6,6 @@ import noImage from '../../images/no-image.webp';
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
-  console.log('cast:', cast);
 
   useEffect(() => {
     getMovieCredits(movieId).then(data => setCast(data.cast));

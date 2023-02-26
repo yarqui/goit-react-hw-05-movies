@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import PAGE_NAMES from 'router/paths';
 import { getMovieById } from 'services/api';
 import { BASE_IMG_URL } from 'services/api';
@@ -9,6 +9,8 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
   const { title, poster_path, vote_average, overview, genres } = movieDetails;
+  const location = useLocation();
+  const backlinkHref = location.state?.from ?? PAGE_NAMES.homepage;
 
   useEffect(() => {
     getMovieById(movieId).then(data => setMovieDetails(data));
@@ -17,7 +19,7 @@ const MovieDetails = () => {
   return (
     <>
       <section>
-        <button type="button">Go back</button>
+        <Link to={backlinkHref}>Go back</Link>
         <img
           src={poster_path ? `${BASE_IMG_URL}${poster_path}` : defaultPoster}
           alt={title}
@@ -43,7 +45,10 @@ const MovieDetails = () => {
         <h4>Additional information</h4>
         <Link to={PAGE_NAMES.cast}>Cast</Link>
         <Link to={PAGE_NAMES.reviews}>Reviews</Link>
-        <Outlet></Outlet>
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet></Outlet>
+        </Suspense>
       </section>
     </>
   );

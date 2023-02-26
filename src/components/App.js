@@ -1,14 +1,19 @@
 //  TODO: use this -> generatePath(PAGE_NAMES,{dynamicParam})
+// TODO: make state machine
+// TODO: lazy import
+// TODO: styles + displayName in styled components
 
 import { Route, Routes } from 'react-router-dom';
-import Cast from './Cast';
-import Home from 'pages/Home/Home';
-import Movies from 'pages/Movies';
-import MovieDetails from 'pages/MovieDetails';
-import Reviews from './Reviews/Reviews';
-import SharedLayout from '../Layouts/SharedLayout';
+import { lazy } from 'react';
 import PAGE_NAMES from 'router/paths';
-import NotFound from 'pages/NotFound';
+
+const SharedLayout = lazy(() => import('../Layouts/SharedLayout'));
+const Home = lazy(() => import('../pages/Home'));
+const Movies = lazy(() => import('../pages/Movies'));
+const MovieDetails = lazy(() => import('../pages/MovieDetails'));
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 const App = () => {
   return (
