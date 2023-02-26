@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { getMovieByQuery } from 'services/api';
 import MovieItems from 'components/MovieItems';
 import { toast } from 'react-toastify';
+import { SearchForm, SearchFormButton, SearchFormInput } from './Movies.styled';
+import { MovieList } from 'pages/Home/Home.styled';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -15,8 +17,8 @@ const Movies = () => {
     }
 
     getMovieByQuery(query)
-      .then(({ results }) => {
-        if (results.length === 0) {
+      .then(({ results, total_results }) => {
+        if (total_results === 0) {
           toast.info(`Sorry, there are no movies with the search ${query}`);
           return;
         }
@@ -41,19 +43,20 @@ const Movies = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <input
+      <SearchForm onSubmit={onSubmit}>
+        <SearchFormInput
           type="text"
           name="search"
           autoComplete="off"
           autoFocus
           placeholder="Search movies by name"
-        ></input>
-        <button type="submit">Search</button>
-      </form>
-      <ul>
+        ></SearchFormInput>
+        <SearchFormButton type="submit"></SearchFormButton>
+      </SearchForm>
+
+      <MovieList>
         <MovieItems movies={movies} />
-      </ul>
+      </MovieList>
     </>
   );
 };

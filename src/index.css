@@ -4,6 +4,8 @@ html {
   box-sizing: border-box;
   width: 100vw;
   overflow-x: hidden;
+  background-color: #252525;
+  color: #e6e6e6;
 }
 
 *,
@@ -19,8 +21,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background-color: #5e5f61;
 }
 
 h1,

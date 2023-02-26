@@ -1,6 +1,11 @@
-// import PAGE_NAMES from 'router/paths';
+import PropTypes from 'prop-types';
 import { BASE_IMG_URL } from 'services/api';
-import { ItemLink } from './MovieItems.styled';
+import {
+  ItemImage,
+  ItemLink,
+  MovieItem,
+  MovieLabel,
+} from './MovieItems.styled';
 import defaultPoster from '../../images/default-poster.webp';
 import { useLocation } from 'react-router-dom';
 
@@ -9,21 +14,25 @@ const MovieItems = ({ movies }) => {
 
   return movies.map(({ id, title, poster_path, release_date }) => {
     return (
-      <li key={id}>
+      <MovieItem key={id}>
         <ItemLink to={`/movies/${id}`} state={{ from: location }}>
-          <img
+          <ItemImage
             src={poster_path ? `${BASE_IMG_URL}${poster_path}` : defaultPoster}
             alt={title}
             width="100px"
-          ></img>
+          ></ItemImage>
+          <MovieLabel>
+            <p>{title ? title : 'No title'}</p>
 
-          <p>{title ? title : 'No title'}</p>
-
-          <p>{release_date ? release_date.slice(0, 4) : ''}</p>
+            <p>{release_date ? release_date.slice(0, 4) : ''}</p>
+          </MovieLabel>
         </ItemLink>
-      </li>
+      </MovieItem>
     );
   });
 };
 
+MovieItems.PropTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+};
 export default MovieItems;

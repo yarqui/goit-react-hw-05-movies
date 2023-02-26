@@ -1,9 +1,16 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import PAGE_NAMES from 'router/paths';
 import { getMovieById } from 'services/api';
 import { BASE_IMG_URL } from 'services/api';
 import defaultPoster from '../../images/default-poster.webp';
+import {
+  LinkStyled,
+  MovieSection,
+  MainMovieTitle,
+  MovieDetailsWrap,
+  SecondaryTitle,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -22,38 +29,44 @@ const MovieDetails = () => {
 
   return (
     <>
-      <section>
-        <Link to={backlinkHref}>Go back</Link>
+      <MovieSection>
+        <LinkStyled to={backlinkHref}>Go back</LinkStyled>
         <img
           src={poster_path ? `${BASE_IMG_URL}${poster_path}` : defaultPoster}
           alt={title}
           width="300px"
         ></img>
 
-        <h2>{title ? title : 'No title'}</h2>
-        <p>
-          User Score: {vote_average ? `${Math.round(vote_average * 10)}%` : 0}
-        </p>
+        <MovieDetailsWrap>
+          <MainMovieTitle>{title ? title : 'No title'}</MainMovieTitle>
+          <p>
+            User Score: {vote_average ? `${Math.round(vote_average * 10)}%` : 0}
+          </p>
+        </MovieDetailsWrap>
 
-        <h3>Overview</h3>
-        <p>{overview ? overview : 'No overview yet'}</p>
+        <MovieDetailsWrap>
+          <SecondaryTitle>Overview</SecondaryTitle>
+          <p>{overview ? overview : 'No overview yet'}</p>
+        </MovieDetailsWrap>
 
-        {genres && (
-          <>
-            <h3>Genres</h3>
-            <p>{genres.map(genre => `${genre.name} `)}</p>
-          </>
-        )}
-      </section>
-      <section>
-        <h4>Additional information</h4>
-        <Link to={PAGE_NAMES.cast}>Cast</Link>
-        <Link to={PAGE_NAMES.reviews}>Reviews</Link>
+        <MovieDetailsWrap>
+          {genres && (
+            <>
+              <SecondaryTitle>Genres</SecondaryTitle>
+              <p>{genres.map(genre => `${genre.name} `)}</p>
+            </>
+          )}
+        </MovieDetailsWrap>
+      </MovieSection>
+      <MovieSection>
+        <SecondaryTitle>Additional information</SecondaryTitle>
+        <LinkStyled to={PAGE_NAMES.cast}>Cast</LinkStyled>
+        <LinkStyled to={PAGE_NAMES.reviews}>Reviews</LinkStyled>
 
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet></Outlet>
         </Suspense>
-      </section>
+      </MovieSection>
     </>
   );
 };

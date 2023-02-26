@@ -1,11 +1,15 @@
-const { Link } = require('react-router-dom');
+import {
+  LinkStyled,
+  SecondaryTitle,
+} from 'pages/MovieDetails/MovieDetails.styled';
+
 const { default: PAGE_NAMES } = require('router/paths');
 
 const NotFound = () => {
   return (
     <>
-      <p>There's no such page</p>
-      <Link to={PAGE_NAMES.homepage}>Back to Homepage</Link>
+      <SecondaryTitle>There's no such page</SecondaryTitle>
+      <LinkStyled to={PAGE_NAMES.homepage}>Back to Homepage</LinkStyled>
     </>
   );
 };

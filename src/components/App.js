@@ -1,15 +1,12 @@
 //  TODO: use this -> generatePath(PAGE_NAMES,{dynamicParam})
 // TODO: make state machine
 // TODO: styles + displayName in styled components
-// TODO: make state machine
-// TODO: if there are no fetch results, show message
-// TODO: catch in every fetch
-// TODO: if there were fetch results rendered, and then search some gibberish, erase previously rendered results? Or just toastify it.
 
 import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import PAGE_NAMES from 'router/paths';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SharedLayout = lazy(() => import('../Layouts/SharedLayout'));
 const Home = lazy(() => import('../pages/Home'));
@@ -33,7 +30,16 @@ const App = () => {
           <Route path="*" element={<NotFound />}></Route>
         </Route>
       </Routes>
-      <ToastContainer position="top-center" autoClose={1500} theme="colored" />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

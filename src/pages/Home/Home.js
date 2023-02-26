@@ -1,8 +1,7 @@
 import { getTrendingMovies } from 'services/api';
 import MovieItems from 'components/MovieItems';
 import { useEffect, useState } from 'react';
-
-// TODO: set <main> tag in body
+import { MovieList, MovieTitle } from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -17,10 +16,10 @@ const Home = () => {
 
   return (
     <>
-      <h2>Trending today</h2>
-      <ul>
+      <MovieTitle>Trending today</MovieTitle>
+      <MovieList>
         <MovieItems movies={movies} />
-      </ul>
+      </MovieList>
     </>
   );
 };

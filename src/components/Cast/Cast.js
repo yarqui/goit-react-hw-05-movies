@@ -1,3 +1,4 @@
+import { MovieList } from 'pages/Home/Home.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BASE_IMG_URL, getMovieCredits } from 'services/api';
@@ -17,7 +18,7 @@ const Cast = () => {
 
   return (
     <>
-      <ul>
+      <MovieList>
         {cast.map(({ id, name, character, profile_path }) => {
           return (
             <li key={id}>
@@ -31,7 +32,7 @@ const Cast = () => {
             </li>
           );
         })}
-      </ul>
+      </MovieList>
     </>
   );
 };
