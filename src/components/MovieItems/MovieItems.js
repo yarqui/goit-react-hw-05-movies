@@ -7,16 +7,19 @@ import { useLocation } from 'react-router-dom';
 const MovieItems = ({ movies }) => {
   const location = useLocation();
 
-  return movies.map(({ id, title, poster_path }) => {
+  return movies.map(({ id, title, poster_path, release_date }) => {
     return (
       <li key={id}>
         <ItemLink to={`/movies/${id}`} state={{ from: location }}>
-          {title ? title : 'No title'}
           <img
             src={poster_path ? `${BASE_IMG_URL}${poster_path}` : defaultPoster}
             alt={title}
             width="100px"
           ></img>
+
+          <p>{title ? title : 'No title'}</p>
+
+          <p>{release_date ? release_date.slice(0, 4) : ''}</p>
         </ItemLink>
       </li>
     );

@@ -7,9 +7,13 @@ const Reviews = () => {
   const [movieReviews, setMovieReviews] = useState([]);
 
   useEffect(() => {
-    getMovieReviews(movieId).then(({ results }) => {
-      setMovieReviews(results);
-    });
+    getMovieReviews(movieId)
+      .then(({ results }) => {
+        setMovieReviews(results);
+      })
+      .catch(error => {
+        console.log('error.message', error.message);
+      });
   }, [movieId]);
 
   return (

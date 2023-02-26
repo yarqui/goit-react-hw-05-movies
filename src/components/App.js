@@ -1,11 +1,15 @@
 //  TODO: use this -> generatePath(PAGE_NAMES,{dynamicParam})
 // TODO: make state machine
-// TODO: lazy import
 // TODO: styles + displayName in styled components
+// TODO: make state machine
+// TODO: if there are no fetch results, show message
+// TODO: catch in every fetch
+// TODO: if there were fetch results rendered, and then search some gibberish, erase previously rendered results? Or just toastify it.
 
 import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import PAGE_NAMES from 'router/paths';
+import { ToastContainer } from 'react-toastify';
 
 const SharedLayout = lazy(() => import('../Layouts/SharedLayout'));
 const Home = lazy(() => import('../pages/Home'));
@@ -17,17 +21,20 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 
 const App = () => {
   return (
-    <Routes>
-      <Route path={PAGE_NAMES.homepage} element={<SharedLayout />}>
-        <Route index element={<Home />}></Route>
-        <Route path={PAGE_NAMES.movies} element={<Movies />}></Route>
-        <Route path={PAGE_NAMES.movieDetails} element={<MovieDetails />}>
-          <Route path={PAGE_NAMES.cast} element={<Cast />}></Route>
-          <Route path={PAGE_NAMES.reviews} element={<Reviews />}></Route>
+    <>
+      <Routes>
+        <Route path={PAGE_NAMES.homepage} element={<SharedLayout />}>
+          <Route index element={<Home />}></Route>
+          <Route path={PAGE_NAMES.movies} element={<Movies />}></Route>
+          <Route path={PAGE_NAMES.movieDetails} element={<MovieDetails />}>
+            <Route path={PAGE_NAMES.cast} element={<Cast />}></Route>
+            <Route path={PAGE_NAMES.reviews} element={<Reviews />}></Route>
+          </Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Route>
-    </Routes>
+      </Routes>
+      <ToastContainer position="top-center" autoClose={1500} theme="colored" />
+    </>
   );
 };
 

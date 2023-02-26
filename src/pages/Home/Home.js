@@ -8,7 +8,11 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    getTrendingMovies().then(data => setMovies(data.results));
+    getTrendingMovies()
+      .then(data => setMovies(data.results))
+      .catch(error => {
+        console.log('error.message', error.message);
+      });
   }, []);
 
   return (

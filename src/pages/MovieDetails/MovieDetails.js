@@ -13,7 +13,11 @@ const MovieDetails = () => {
   const backlinkHref = location.state?.from ?? PAGE_NAMES.homepage;
 
   useEffect(() => {
-    getMovieById(movieId).then(data => setMovieDetails(data));
+    getMovieById(movieId)
+      .then(data => setMovieDetails(data))
+      .catch(error => {
+        console.log('error.message', error.message);
+      });
   }, [movieId]);
 
   return (

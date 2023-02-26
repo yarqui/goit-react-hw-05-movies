@@ -8,7 +8,11 @@ const Cast = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    getMovieCredits(movieId).then(data => setCast(data.cast));
+    getMovieCredits(movieId)
+      .then(data => setCast(data.cast))
+      .catch(error => {
+        console.log('error.message', error.message);
+      });
   }, [movieId]);
 
   return (

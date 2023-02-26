@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovieByQuery } from 'services/api';
 import MovieItems from 'components/MovieItems';
+import { toast } from 'react-toastify';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -13,7 +14,18 @@ const Movies = () => {
       return;
     }
 
-    getMovieByQuery(query).then(({ results }) => setMovies(results));
+    getMovieByQuery(query)
+      .then(({ results }) => {
+        if (results.length === 0) {
+          toast.info(`Sorry, there are no movies with the search ${query}`);
+          return;
+        }
+
+        setMovies(results);
+      })
+      .catch(error => {
+        console.log('error.message', error.message);
+      });
   }, [query]);
 
   const onSubmit = e => {
@@ -42,7 +54,6 @@ const Movies = () => {
       <ul>
         <MovieItems movies={movies} />
       </ul>
-      ;
     </>
   );
 };
